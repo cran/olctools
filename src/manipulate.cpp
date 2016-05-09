@@ -47,13 +47,11 @@ std::string olc_manipulate::recover_single(std::string olc, double latitude, dou
   }
 
   int padding_length = (separator_position - olc.find(separator));
-  double resolution = pow(20, (2 - (padding_length/2)));
+  double resolution = pow(20.0, (2.0 - (padding_length / 2.0)));
   double area_to_edge = resolution / 2.0;
-  double round_lat = ref_latitude / resolution;
-  double round_long = ref_longitude / resolution;
 
   std::vector < double > code_area = olc_decode_single(
-    olc_encode_single(round_lat, round_long, max_pair_length).substr(0, padding_length) + olc
+    olc_encode_single(ref_latitude, ref_longitude, max_pair_length).substr(0, padding_length) + olc
   );
 
   double degrees_difference = (code_area[4] - ref_latitude);
@@ -73,15 +71,14 @@ std::string olc_manipulate::recover_single(std::string olc, double latitude, dou
   return(olc_encode_single(code_area[4], code_area[5], code_area[6]));
 }
 
-std::vector < std::string > olc_manipulate::shorten_vector(std::vector < std::string > olc, std::vector < double > latitude,
-                                                          std::vector < double > longitude){
+CharacterVector olc_manipulate::shorten_vector(CharacterVector olc, NumericVector latitude, NumericVector longitude){
 
   if(latitude.size() != longitude.size()){
     throw std::range_error("There must be as many longitude values as latitude values");
   }
 
   unsigned int input_size = olc.size();
-  std::vector < std::string > output(input_size);
+  CharacterVector output(input_size);
 
   if(latitude.size() == 1){
 
@@ -89,7 +86,12 @@ std::vector < std::string > olc_manipulate::shorten_vector(std::vector < std::st
       if((i % 10000) == 0){
         Rcpp::checkUserInterrupt();
       }
-      output[i] = shorten_single(olc[i], latitude[0], longitude[0]);
+
+      if(CharacterVector::is_na(olc[i]) || NumericVector::is_na(latitude[0]) || NumericVector::is_na(longitude[0])){
+        output[i] = NA_STRING;
+      } else {
+        output[i] = shorten_single(Rcpp::as<std::string>(olc[i]), latitude[0], longitude[0]);
+      }
     }
 
   } else if(latitude.size() == input_size){
@@ -98,7 +100,12 @@ std::vector < std::string > olc_manipulate::shorten_vector(std::vector < std::st
       if((i % 10000) == 0){
         Rcpp::checkUserInterrupt();
       }
-      output[i] = shorten_single(olc[i], latitude[i], longitude[i]);
+
+      if(CharacterVector::is_na(olc[i]) || NumericVector::is_na(latitude[i]) || NumericVector::is_na(longitude[i])){
+        output[i] = NA_STRING;
+      } else {
+        output[i] = shorten_single(Rcpp::as<std::string>(olc[i]), latitude[i], longitude[i]);
+      }
     }
 
   } else {
@@ -108,15 +115,15 @@ std::vector < std::string > olc_manipulate::shorten_vector(std::vector < std::st
   return output;
 }
 
-std::vector < std::string > olc_manipulate::recover_vector(std::vector < std::string > olc, std::vector < double > latitude,
-                                                           std::vector < double > longitude){
+CharacterVector olc_manipulate::recover_vector(CharacterVector olc, NumericVector latitude,
+                                                           NumericVector longitude){
 
   if(latitude.size() != longitude.size()){
     throw std::range_error("There must be as many longitude values as latitude values");
   }
 
   unsigned int input_size = olc.size();
-  std::vector < std::string > output(input_size);
+  CharacterVector output(input_size);
 
   if(latitude.size() == 1){
 
@@ -124,7 +131,12 @@ std::vector < std::string > olc_manipulate::recover_vector(std::vector < std::st
       if((i % 10000) == 0){
         Rcpp::checkUserInterrupt();
       }
-      output[i] = recover_single(olc[i], latitude[0], longitude[0]);
+      if(CharacterVector::is_na(olc[i]) || NumericVector::is_na(latitude[0]) || NumericVector::is_na(longitude[0])){
+        output[i] = NA_STRING;
+      } else {
+        output[i] = recover_single(Rcpp::as<std::string>(olc[i]), latitude[0], longitude[0]);
+      }
+
     }
 
   } else if(latitude.size() == input_size){
@@ -133,7 +145,11 @@ std::vector < std::string > olc_manipulate::recover_vector(std::vector < std::st
       if((i % 10000) == 0){
         Rcpp::checkUserInterrupt();
       }
-      output[i] = recover_single(olc[i], latitude[i], longitude[i]);
+      if(CharacterVector::is_na(olc[i]) || NumericVector::is_na(latitude[i]) || NumericVector::is_na(longitude[i])){
+        output[i] = NA_STRING;
+      } else {
+        output[i] = recover_single(Rcpp::as<std::string>(olc[i]), latitude[i], longitude[i]);
+      }
     }
 
   } else {

@@ -1,6 +1,13 @@
+olctools 0.3.0
+-----------------------------------
+* NA support incorporated.
+* Bug in reference implementation with recovering shortened OLCs fixed over there, and subsequently
+fixed over here!
+
 olctools 0.2.1
 -----------------------------------
 * first CRAN release.
+* Bugfixes to allow for a Solaris release.
 
 olctools 0.2.0
 -----------------------------------

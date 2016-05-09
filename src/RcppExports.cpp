@@ -6,85 +6,113 @@
 using namespace Rcpp;
 
 // validate_olc
-std::vector < bool > validate_olc(std::vector < std::string > codes);
+LogicalVector validate_olc(CharacterVector codes);
 RcppExport SEXP olctools_validate_olc(SEXP codesSEXP) {
 BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< std::vector < std::string > >::type codes(codesSEXP);
-    __result = Rcpp::wrap(validate_olc(codes));
-    return __result;
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< CharacterVector >::type codes(codesSEXP );
+        LogicalVector __result = validate_olc(codes);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
 END_RCPP
 }
 // validate_short
-std::vector < bool > validate_short(std::vector < std::string > codes);
+LogicalVector validate_short(CharacterVector codes);
 RcppExport SEXP olctools_validate_short(SEXP codesSEXP) {
 BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< std::vector < std::string > >::type codes(codesSEXP);
-    __result = Rcpp::wrap(validate_short(codes));
-    return __result;
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< CharacterVector >::type codes(codesSEXP );
+        LogicalVector __result = validate_short(codes);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
 END_RCPP
 }
 // validate_full
-std::vector < bool > validate_full(std::vector < std::string > codes);
+LogicalVector validate_full(CharacterVector codes);
 RcppExport SEXP olctools_validate_full(SEXP codesSEXP) {
 BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< std::vector < std::string > >::type codes(codesSEXP);
-    __result = Rcpp::wrap(validate_full(codes));
-    return __result;
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< CharacterVector >::type codes(codesSEXP );
+        LogicalVector __result = validate_full(codes);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
 END_RCPP
 }
 // encode_olc
-std::vector < std::string > encode_olc(std::vector < double > lats, std::vector < double > longs, std::vector < int > length);
+CharacterVector encode_olc(NumericVector lats, NumericVector longs, IntegerVector length);
 RcppExport SEXP olctools_encode_olc(SEXP latsSEXP, SEXP longsSEXP, SEXP lengthSEXP) {
 BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< std::vector < double > >::type lats(latsSEXP);
-    Rcpp::traits::input_parameter< std::vector < double > >::type longs(longsSEXP);
-    Rcpp::traits::input_parameter< std::vector < int > >::type length(lengthSEXP);
-    __result = Rcpp::wrap(encode_olc(lats, longs, length));
-    return __result;
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< NumericVector >::type lats(latsSEXP );
+        Rcpp::traits::input_parameter< NumericVector >::type longs(longsSEXP );
+        Rcpp::traits::input_parameter< IntegerVector >::type length(lengthSEXP );
+        CharacterVector __result = encode_olc(lats, longs, length);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
 END_RCPP
 }
 // decode_olc
-DataFrame decode_olc(std::vector < std::string > olcs);
+DataFrame decode_olc(CharacterVector olcs);
 RcppExport SEXP olctools_decode_olc(SEXP olcsSEXP) {
 BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< std::vector < std::string > >::type olcs(olcsSEXP);
-    __result = Rcpp::wrap(decode_olc(olcs));
-    return __result;
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< CharacterVector >::type olcs(olcsSEXP );
+        DataFrame __result = decode_olc(olcs);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
 END_RCPP
 }
 // shorten_olc
-std::vector < std::string > shorten_olc(std::vector < std::string > olcs, std::vector < double > lats, std::vector < double > longs);
+CharacterVector shorten_olc(CharacterVector olcs, NumericVector lats, NumericVector longs);
 RcppExport SEXP olctools_shorten_olc(SEXP olcsSEXP, SEXP latsSEXP, SEXP longsSEXP) {
 BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< std::vector < std::string > >::type olcs(olcsSEXP);
-    Rcpp::traits::input_parameter< std::vector < double > >::type lats(latsSEXP);
-    Rcpp::traits::input_parameter< std::vector < double > >::type longs(longsSEXP);
-    __result = Rcpp::wrap(shorten_olc(olcs, lats, longs));
-    return __result;
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< CharacterVector >::type olcs(olcsSEXP );
+        Rcpp::traits::input_parameter< NumericVector >::type lats(latsSEXP );
+        Rcpp::traits::input_parameter< NumericVector >::type longs(longsSEXP );
+        CharacterVector __result = shorten_olc(olcs, lats, longs);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
 END_RCPP
 }
 // recover_olc
-std::vector < std::string > recover_olc(std::vector < std::string > olcs, std::vector < double > lats, std::vector < double > longs);
+CharacterVector recover_olc(CharacterVector olcs, NumericVector lats, NumericVector longs);
 RcppExport SEXP olctools_recover_olc(SEXP olcsSEXP, SEXP latsSEXP, SEXP longsSEXP) {
 BEGIN_RCPP
-    Rcpp::RObject __result;
-    Rcpp::RNGScope __rngScope;
-    Rcpp::traits::input_parameter< std::vector < std::string > >::type olcs(olcsSEXP);
-    Rcpp::traits::input_parameter< std::vector < double > >::type lats(latsSEXP);
-    Rcpp::traits::input_parameter< std::vector < double > >::type longs(longsSEXP);
-    __result = Rcpp::wrap(recover_olc(olcs, lats, longs));
-    return __result;
+    SEXP __sexp_result;
+    {
+        Rcpp::RNGScope __rngScope;
+        Rcpp::traits::input_parameter< CharacterVector >::type olcs(olcsSEXP );
+        Rcpp::traits::input_parameter< NumericVector >::type lats(latsSEXP );
+        Rcpp::traits::input_parameter< NumericVector >::type longs(longsSEXP );
+        CharacterVector __result = recover_olc(olcs, lats, longs);
+        PROTECT(__sexp_result = Rcpp::wrap(__result));
+    }
+    UNPROTECT(1);
+    return __sexp_result;
 END_RCPP
 }
